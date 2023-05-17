@@ -1,9 +1,20 @@
 const http = require('http');
 const fs = require('fs');
+const _ = require('lodash');
 
 
 const server = http.createServer((req, res) => {
-  console.log("req.url=>", req.url, " req.method=>", req.method);
+  // lodash
+  const randomNumber = _.random(0, 20);
+  console.log('random number=>', randomNumber);
+
+  // this function runs only once
+  const greetOnce = _.once(() => {
+    console.log('Say hello once!');
+  });
+  greetOnce();
+  greetOnce();
+
   // set headers
   res.setHeader('Content-Type', 'text/html');
   // routing
