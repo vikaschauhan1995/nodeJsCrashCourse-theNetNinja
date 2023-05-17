@@ -1,12 +1,20 @@
 const http = require('http');
+const fs = require('fs');
+
 
 const server = http.createServer((req, res) => {
   console.log("req.url=>", req.url, " req.method=>", req.method);
   // set headers
-  res.setHeader('Content-Type', 'text/plain');
-  res.write('Hello world');
-  res.write('Hello world again!');
-  res.end();
+  res.setHeader('Content-Type', 'text/html');
+  fs.readFile('./views/home.html', (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end();
+    } else {
+      // res.write(data);
+      res.end(data);
+    }
+  });
 });
 
 server.listen(8000, 'localhost', () => {
